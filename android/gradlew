@@ -60,6 +60,9 @@ die () {
     exit 1
 }
 
+android.useAndroidX=true
+android.enableJetifier=true
+
 # OS specific support (must be 'true' or 'false').
 cygwin=false
 msys=false
