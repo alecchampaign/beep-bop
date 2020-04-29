@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -12,29 +12,44 @@ import Video from 'react-native-video';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const App: () => React$Node = () => {
+  const [selected, setSelected] = useState('home');
+  const homeView = (
+    <View style={styles.media}>
+      <Video
+        source={{
+          uri:
+            'http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4',
+        }}
+        resizeMode="cover"
+        style={styles.backgroundVideo}
+        repeat={true}
+      />
+    </View>
+  );
+  const userView = (
+    <View style={styles.media}>
+      <Text>Test</Text>
+    </View>
+  );
+  const views = {home: homeView, user: userView};
+
   return (
     <>
       <StatusBar translucent={true} backgroundColor="transparent" />
       <SafeAreaView style={styles.media}>
-        <View style={styles.media}>
-          <Video
-            source={{
-              uri:
-                'http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4',
-            }}
-            resizeMode="cover"
-            style={styles.backgroundVideo}
-            repeat={true}
-          />
-        </View>
+        {views[selected]}
         <View style={styles.navbar}>
-          <TouchableOpacity style={styles.navBtn}>
+          <TouchableOpacity
+            style={styles.navBtn}
+            onPress={() => setSelected('home')}>
             <Icon name="home" color="white" size={35} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.navBtn}>
             <Icon name="pluscircleo" color="white" size={35} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.navBtn}>
+          <TouchableOpacity
+            style={styles.navBtn}
+            onPress={() => setSelected('user')}>
             <Icon name="user" color="white" size={35} />
           </TouchableOpacity>
         </View>
