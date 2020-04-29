@@ -6,8 +6,10 @@ import {
   View,
   Text,
   StatusBar,
+  TouchableOpacity,
 } from 'react-native';
 import Video from 'react-native-video';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const App: () => React$Node = () => {
   return (
@@ -19,10 +21,22 @@ const App: () => React$Node = () => {
             source={{
               uri:
                 'http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4',
-            }} // Can be a URL or a local file.
+            }}
             resizeMode="cover"
             style={styles.backgroundVideo}
+            repeat={true}
           />
+        </View>
+        <View style={styles.navbar}>
+          <TouchableOpacity style={styles.navBtn}>
+            <Icon name="home" color="white" size={35} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.navBtn}>
+            <Icon name="pluscircleo" color="white" size={35} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.navBtn}>
+            <Icon name="user" color="white" size={35} />
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     </>
@@ -32,7 +46,7 @@ const App: () => React$Node = () => {
 const styles = StyleSheet.create({
   media: {
     backgroundColor: 'black',
-    flex: 1,
+    flex: 15,
   },
   text: {
     color: 'white',
@@ -43,6 +57,18 @@ const styles = StyleSheet.create({
     left: 0,
     bottom: 0,
     right: 0,
+  },
+  navbar: {
+    flex: 1.1,
+    borderTopWidth: 2,
+    borderTopColor: '#1c1c1c',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0)',
+  },
+  navBtn: {
+    borderBottomWidth: 2,
   },
 });
 
