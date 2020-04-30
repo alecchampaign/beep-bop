@@ -23,18 +23,24 @@ const App: () => React$Node = () => {
         'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
       description: 'For bigger meltdowns #chromcast',
       user: 'john_doe',
+      likes: 50,
+      commentCount: 20,
     },
     {
       url:
         'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
       description: 'Cars',
       user: 'jane_doe',
+      likes: 8,
+      commentCount: 2,
     },
     {
       url:
         'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
       description: 'This is a description #description #bunnies',
       user: 'test_user',
+      likes: 154,
+      commentCount: 120,
     },
   ];
   const homeView = (
@@ -48,10 +54,26 @@ const App: () => React$Node = () => {
         repeat={true}
       />
       <View style={styles.videoDescription}>
-        <Text style={styles.videoText}>{'@' + videos[selectedVideo].user}</Text>
-        <Text style={styles.videoText}>
-          {videos[selectedVideo].description}
-        </Text>
+        <View>
+          <View styles={styles.stats}>
+            <AntIcon name="heart" color="white" size={50} />
+            <Text style={styles.statText}>{videos[selectedVideo].likes}</Text>
+          </View>
+          <View styles={styles.stats}>
+            <FontAwesomeIcon name="commenting" color="white" size={50} />
+            <Text style={styles.statText}>
+              {videos[selectedVideo].commentCount}
+            </Text>
+          </View>
+        </View>
+        <View style={{alignSelf: 'flex-start'}}>
+          <Text style={styles.videoText}>
+            {'@' + videos[selectedVideo].user}
+          </Text>
+          <Text style={styles.videoText}>
+            {videos[selectedVideo].description}
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -125,12 +147,20 @@ const styles = StyleSheet.create({
   videoDescription: {
     position: 'absolute',
     bottom: 0,
-    margin: 10,
     marginBottom: 20,
+    justifyContent: 'space-around',
+    width: '100%',
+    alignItems: 'flex-end',
+    padding: 12,
   },
   videoText: {
     color: 'white',
   },
+  statText: {
+    color: 'white',
+    textAlign: 'center',
+  },
+  stats: {},
 });
 
 export default App;
