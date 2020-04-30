@@ -9,9 +9,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Video from 'react-native-video';
-import Icon from 'react-native-vector-icons/AntDesign';
+import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import AntIcon from 'react-native-vector-icons/AntDesign';
 
 const App: () => React$Node = () => {
+  // console.error(AntIcon);
   const [selected, setSelected] = useState('home');
   const [selectedVideo, setSelectedVideo] = useState(2);
   const videos = [
@@ -68,15 +71,23 @@ const App: () => React$Node = () => {
           <TouchableOpacity
             style={styles.navBtn}
             onPress={() => setSelected('home')}>
-            <Icon name="home" color="white" size={35} />
+            <MaterialIcon
+              name={selected === 'home' ? 'home' : 'home-outline'}
+              color="white"
+              size={35}
+            />
           </TouchableOpacity>
           <TouchableOpacity style={styles.navBtn}>
-            <Icon name="pluscircleo" color="white" size={35} />
+            <AntIcon name="pluscircleo" color="white" size={35} />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.navBtn}
             onPress={() => setSelected('user')}>
-            <Icon name="user" color="white" size={35} />
+            <FontAwesomeIcon
+              name={selected === 'user' ? 'user' : 'user-o'}
+              color="white"
+              size={35}
+            />
           </TouchableOpacity>
         </View>
       </SafeAreaView>
