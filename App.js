@@ -2,21 +2,20 @@ import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import Video from 'react-native-video';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 
 const App: () => React$Node = () => {
-  // console.error(AntIcon);
   const [selected, setSelected] = useState('home');
-  const [selectedVideo, setSelectedVideo] = useState(2);
+  const [selectedVideo, setSelectedVideo] = useState(0);
   const videos = [
     {
       url:
@@ -43,8 +42,22 @@ const App: () => React$Node = () => {
       commentCount: 120,
     },
   ];
+
+  const onSwipeUp = () => {
+    if (selectedVideo < videos.length - 1) setSelectedVideo(selectedVideo + 1);
+    else setSelectedVideo(0);
+  };
+
+  const onSwipeDown = () => {
+    if (selectedVideo > 0) setSelectedVideo(selectedVideo - 1);
+    else setSelectedVideo(videos.length - 1);
+  };
+
   const homeView = (
-    <View style={styles.media}>
+    <GestureRecognizer
+      style={styles.media}
+      onSwipeUp={onSwipeUp}
+      onSwipeDown={onSwipeDown}>
       <Video
         source={{
           uri: videos[selectedVideo].url,
@@ -75,7 +88,7 @@ const App: () => React$Node = () => {
           </Text>
         </View>
       </View>
-    </View>
+    </GestureRecognizer>
   );
   const userView = (
     <View style={styles.media}>
