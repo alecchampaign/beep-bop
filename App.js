@@ -13,17 +13,43 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 const App: () => React$Node = () => {
   const [selected, setSelected] = useState('home');
+  const [selectedVideo, setSelectedVideo] = useState(2);
+  const videos = [
+    {
+      url:
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
+      description: 'For bigger meltdowns #chromcast',
+      user: 'john_doe',
+    },
+    {
+      url:
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+      description: 'Cars',
+      user: 'jane_doe',
+    },
+    {
+      url:
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+      description: 'This is a description #description #bunnies',
+      user: 'test_user',
+    },
+  ];
   const homeView = (
     <View style={styles.media}>
       <Video
         source={{
-          uri:
-            'http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4',
+          uri: videos[selectedVideo].url,
         }}
         resizeMode="cover"
         style={styles.backgroundVideo}
         repeat={true}
       />
+      <View style={styles.videoDescription}>
+        <Text style={styles.videoText}>{'@' + videos[selectedVideo].user}</Text>
+        <Text style={styles.videoText}>
+          {videos[selectedVideo].description}
+        </Text>
+      </View>
     </View>
   );
   const userView = (
@@ -84,6 +110,15 @@ const styles = StyleSheet.create({
   },
   navBtn: {
     borderBottomWidth: 2,
+  },
+  videoDescription: {
+    position: 'absolute',
+    bottom: 0,
+    margin: 10,
+    marginBottom: 20,
+  },
+  videoText: {
+    color: 'white',
   },
 });
 
